@@ -21,27 +21,27 @@ From a Linux or Mac, you can just use the ssh-keygen command.
 
 You will need to create a Key Vault to store your SSH Private Key that will then be used as part of the deployment. [Download Azure CLI](http://aka.ms/webpi-azure-cli) and install it on your Windows Machine.
 
-1. Create Key Vault using Azure CLI<br/>
-  a.  Login to Azure with azure cli
-      ```sh
-      azure login
-      ```
-  b.  Create new Resource Group: **azure group create \<name\> \<location\>**
-      ```sh
-      azure group create OpenShiftRG01 westeurope
-      ```
-  c.  Create Key Vault: **azure keyvault create -u \<vault-name\> -g \<resource-group\> -l \<location\>**
-      ```sh
-      azure keyvault create -u OpenShiftKV01 -g OpenShiftRG01 -l westeurope
-      ```
-  d.  Create Secret: **azure keyvault secret set -u \<vault-name\> -s \<secret-name\> --file \<private-key-file-name\>**
-      ```sh
-      azure keyvault secret set -u OpenShiftKV01 -s openshiftkv01 --file openshiftkv01.id_rsa
-      ```
-  e.  Enable the Key Vault for Template Deployments: **azure keyvault set-policy -u \<vault-name\> --enabled-for-template-deployment true**
-      ```sh
-      azure keyvault set-policy -u OpenShiftKV01 --enabled-for-template-deployment true
-      ```
+#### Create Key Vault using Azure CLI<br/>
+Login to Azure with azure cli
+```sh
+azure login
+```
+Create new Resource Group: **azure group create \<name\> \<location\>**
+```sh
+azure group create OpenShiftRG01 westeurope
+```
+Create Key Vault: **azure keyvault create -u \<vault-name\> -g \<resource-group\> -l \<location\>**
+```sh
+azure keyvault create -u OpenShiftKV01 -g OpenShiftRG01 -l westeurope
+```
+Create Secret: **azure keyvault secret set -u \<vault-name\> -s \<secret-name\> --file \<private-key-file-name\>**
+```sh
+azure keyvault secret set -u OpenShiftKV01 -s openshiftkv01 --file openshiftkv01.id_rsa
+```
+Enable the Key Vault for Template Deployments: **azure keyvault set-policy -u \<vault-name\> --enabled-for-template-deployment true**
+```sh
+azure keyvault set-policy -u OpenShiftKV01 --enabled-for-template-deployment true
+```
 
 ### azuredeploy.Parameters.json File Explained
 
