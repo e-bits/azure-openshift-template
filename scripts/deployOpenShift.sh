@@ -32,6 +32,7 @@ sed -i -e "s/^#pty=False/pty=False/" /etc/ansible/ansible.cfg
 echo "Generating Ansible hosts file"
 
 cat > /etc/ansible/hosts <<EOF
+# e-bits
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
@@ -54,13 +55,6 @@ openshift_master_cluster_public_vip=$MASTERPUBLICIPADDRESS
 # Enable htpasswd auth for username / password authentication
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 
-# Remo's custom settings
-openshift_docker_disable_push_dockerhub=True
-osm_cockpit_plugins=['cockpit-kubernetes']
-openshift_set_hostname=True
-containerized=true
-debug_level=2
-
 # host group for masters
 [masters]
 $MASTER.$DOMAIN
@@ -79,7 +73,7 @@ runuser -l $SUDOUSER -c "git clone https://github.com/openshift/openshift-ansibl
 
 echo "Executing Ansible playbook"
 
-runuser -l $SUDOUSER -c "ansible-playbook openshift-ansible/playbooks/byo/config.yml"
+# runuser -l $SUDOUSER -c "ansible-playbook openshift-ansible/playbooks/byo/config.yml"
 
 echo "Modifying sudoers"
 

@@ -70,7 +70,7 @@ azure keyvault set-policy -u OpenShiftKV01 --enabled-for-template-deployment tru
 
 Once you have collected all of the prerequisites for the template, you can deploy the template by populating the *azuredeploy.parameters.json* file and executing Resource Manager deployment commands with azure cli. <br/>
 ```sh
-azure group deployment create OpenShiftRG01 OpenShiftDeployment01 --template-file azuredeploy.json --parameters-file azuredeploy.parameters.json
+azure group deployment create OpenShiftRG01 OpenShiftDeployment01 --template-file azuredeploy.json --parameters-file azuredeploy.parameters.user.json
 ```
 
 ### NOTE
@@ -85,7 +85,6 @@ This template creates an OpenShift user but does not make it a full OpenShift us
 
 1. SSH in to master node
 2. Execute the following command:
-
    ```sh
    sudo oadm policy add-cluster-role-to-user cluster-admin <user>
    ```
