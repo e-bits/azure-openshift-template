@@ -57,9 +57,8 @@ azure keyvault set-policy -u OpenShiftKV01 --enabled-for-template-deployment tru
 10. adminUsername: Admin username for both OS login and OpenShift login
 11. adminPassword: Password for OpenShift login
 12. sshPublicKey: Copy your SSH Public Key here
-13. subscriptionId: Your Subscription ID<br/>
-    a. PowerShell: get-AzureAccount
-	b. Azure CLI: azure account show - Field is ID
+13. subscriptionId: Your Subscription ID <br/>
+    Azure CLI: `azure account show`
 14. keyVaultResourceGroup: The name of the Resource Group that contains the Key Vault
 15. keyVaultName: The name of the Key Vault you created
 16. keyVaultSecret: The Secret Name you used when creating the Secret
