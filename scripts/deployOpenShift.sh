@@ -52,6 +52,8 @@ openshift_master_cluster_public_hostname=$MASTERPUBLICIPHOSTNAME
 openshift_master_cluster_public_vip=$MASTERPUBLICIPADDRESS
 openshift_master_public_api_url=https://openshift.$ROUTING
 openshift_master_public_console_url=https://openshift.$ROUTING/console
+openshift_master_api_port=443
+openshift_master_console_port=443
 
 containerized=true
 openshift_install_examples=true
