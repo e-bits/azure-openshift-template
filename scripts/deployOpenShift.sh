@@ -44,8 +44,8 @@ ansible_become=yes
 deployment_type=origin
 openshift_release=v1.3.1
 openshift_image_tag=v1.3.1
-# docker_udev_workaround=True
-# openshift_use_dnsmasq=no
+docker_udev_workaround=true
+openshift_use_dnsmasq=true
 
 openshift_master_default_subdomain=apps.$ROUTING
 openshift_master_cluster_public_hostname=$MASTERPUBLICIPHOSTNAME
