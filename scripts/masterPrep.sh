@@ -1,4 +1,9 @@
 #!/bin/bash
+
+set -e
+
+SUDOUSER=$1
+
 echo $(date) " - Starting Script"
 
 # Update system to latest packages and install dependencies
@@ -26,6 +31,10 @@ yum-config-manager epel --disable
 echo $(date) " - Installing Docker"
 yum -y install docker
 sed -i -e "s#^OPTIONS='--selinux-enabled'#OPTIONS='--selinux-enabled --insecure-registry 172.30.0.0/16'#" /etc/sysconfig/docker
+
+# To avoid having to use sudo when you use the docker command, create a Unix group called docker and add users to it
+groupadd docker
+usermod -aG docker $SUDOUSER
 
 # Create thin pool logical volume for Docker
 echo $(date) " - Creating thin pool logical volume for Docker and staring service"
