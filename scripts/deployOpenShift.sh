@@ -32,7 +32,6 @@ sed -i -e "s/^#pty=False/pty=False/" /etc/ansible/ansible.cfg
 echo "Generating Ansible hosts file"
 
 cat > /etc/ansible/hosts <<EOF
-# e-bits
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
@@ -45,15 +44,26 @@ ansible_become=yes
 deployment_type=origin
 openshift_release=v1.3.1
 openshift_image_tag=v1.3.1
-docker_udev_workaround=True
-openshift_use_dnsmasq=no
-openshift_master_default_subdomain=$ROUTING
+# docker_udev_workaround=True
+# openshift_use_dnsmasq=no
 
+openshift_master_default_subdomain=apps.$ROUTING
 openshift_master_cluster_public_hostname=$MASTERPUBLICIPHOSTNAME
 openshift_master_cluster_public_vip=$MASTERPUBLICIPADDRESS
+openshift_master_public_api_url=https://openshift.$ROUTING
+openshift_master_public_console_url=https://openshift.$ROUTING/console
+
+containerized=true
+openshift_install_examples=true
+openshift_docker_disable_push_dockerhub=True
+osm_use_cockpit=true
+osm_cockpit_plugins=['cockpit-kubernetes']
 
 # Enable htpasswd auth for username / password authentication
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+
+# additional cors origins
+osm_custom_cors_origins=['openshift.$ROUTING']
 
 # host group for masters
 [masters]
