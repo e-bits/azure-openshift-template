@@ -182,12 +182,12 @@
 		"lbBackendPoolId": "[concat(variables('nodeLbId'),'/backendAddressPools/loadBalancerBackend')]",
 		"lbHttpProbeId": "[concat(variables('nodeLbId'),'/probes/httpProbe')]",
 		"lbHttpsProbeId": "[concat(variables('nodeLbId'),'/probes/httpsProbe')]",
-		"centos": { 
-			"publisher": "Openlogic", 
-			"offer": "CentOS", 
-			"sku": "7.2", 
-			"version": "latest" 
-		}, 
+		"centos": {
+			"publisher": "Openlogic",
+			"offer": "CentOS",
+			"sku": "7.2",
+			"version": "latest"
+		},
 		"rhel": {
 			"publisher": "RedHat",
 			"offer": "RHEL",
@@ -589,10 +589,18 @@
 					},
 					"dataDisks": [{
 						"name": "[concat(parameters('openshiftMasterHostname'), '-docker-pool')]",
-						"diskSizeGB": "1023",
+						"diskSizeGB": "512",
 						"lun": 0,
 						"vhd": {
 							"uri": "[concat('https://', variables('newStorageAccountMaster'), '.blob.core.windows.net/vhd/', parameters('openshiftMasterHostname'), '-docker-pool.vhd')]"
+						},
+						"createOption": "Empty"
+					}, {
+						"name": "[concat(parameters('openshiftMasterHostname'), '-nfs01')]",
+						"diskSizeGB": "512",
+						"lun": 0,
+						"vhd": {
+							"uri": "[concat('https://', variables('newStorageAccountMaster'), '.blob.core.windows.net/vhd/', parameters('openshiftMasterHostname'), '-nfs01.vhd')]"
 						},
 						"createOption": "Empty"
 					}]
@@ -703,7 +711,7 @@
 					},
 					"dataDisks": [{
 						"name": "[concat(variables('namingInfix'), copyIndex(), '-docker-pool')]",
-						"diskSizeGB": "1023",
+						"diskSizeGB": "512",
 						"lun": 0,
 						"vhd": {
 							"uri": "[concat('https://', variables('newStorageAccountNode'), '.blob.core.windows.net/vhd/', variables('namingInfix'), copyIndex(), '-docker-pool.vhd')]"
@@ -807,7 +815,7 @@
 	"outputs": {
 		"openshiftConsoleUrl": {
 			"type": "string",
-			"value": "[concat('https://', reference(parameters('openshiftMasterPublicIpDnsLabelPrefix')).dnsSettings.fqdn, ':8443/console')]"
+			"value": "[concat('https://', reference(parameters('openshiftMasterPublicIpDnsLabelPrefix')).dnsSettings.fqdn, '/console')]"
 		},
 		"openshiftMasterSsh": {
 			"type": "string",
