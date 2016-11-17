@@ -598,7 +598,7 @@
 					}, {
 						"name": "[concat(parameters('openshiftMasterHostname'), '-nfs01')]",
 						"diskSizeGB": "512",
-						"lun": 0,
+						"lun": 1,
 						"vhd": {
 							"uri": "[concat('https://', variables('newStorageAccountMaster'), '.blob.core.windows.net/vhd/', parameters('openshiftMasterHostname'), '-nfs01.vhd')]"
 						},
